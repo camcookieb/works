@@ -1,0 +1,203 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Work - Camcookie Books</title>
+  <link rel="icon" type="image/png" href="https://camcookieb.github.io/logo.png">
+  <style>
+    body {
+      font-family: serif;
+      background: #fff;
+      color: #0099ff;
+      margin: 0;
+      padding: 0;
+    }
+    .content {
+      max-width: 900px;   /* prevent super wide overflow */
+      border: solid #0099ff;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 10px auto;
+      word-wrap: break-word; /* break long words/links */
+      overflow-x: hidden;    /* hide accidental horizontal scroll */
+    }
+    .header { color: #0099ff; }
+
+    /* Topbar */
+    .Topbar {
+      width: 100%;
+      height: 50px;
+      background-color: #0099ff;
+      color: #fff;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      padding: 0 10px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .Topbarlink {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .Topbarlink:hover { background-color: #fff; color: #0099ff; }
+    .menu-btn { display: none; font-size: 2rem; cursor: pointer; margin-left: auto; color: #fff; }
+    @media screen and (max-width: 700px) {
+      .Topbarlink { display: none; }
+      .search-bar { display: none; }
+      .menu-btn { display: block; }
+    }
+
+    /* Overlay menu */
+    .overlay {
+      height: 100%; width: 0; position: fixed; z-index: 2000;
+      top: 0; left: 0; background-color: #0099ff;
+      overflow-x: hidden; transition: 0.5s;
+    }
+    .overlay-content { position: relative; top: 25%; width: 100%; text-align: center; }
+    .overlay-content a {
+      display: block; font-size: 1.5rem; color: #fff;
+      padding: 12px 20px; text-decoration: none;
+    }
+    .overlay-content a:hover { background-color: #fff; color: #0099ff; }
+    .closebtn { position: absolute; top: 20px; right: 45px; font-size: 3rem; color: #fff; cursor: pointer; }
+
+    /* Work content */
+    #workTitle { font-size: 2rem; margin-bottom: 0.5rem; }
+    #workMeta { font-size: 0.9rem; margin-bottom: 1rem; }
+    #workContent {
+      white-space: pre-wrap; /* preserve line breaks */
+      line-height: 1.5;
+    }
+    #workContent a { color: #0066cc; text-decoration: underline; }
+
+    /* Navigation buttons */
+    .chapter-nav {
+      display: flex;
+      flex-wrap: wrap; /* prevent overflow on small screens */
+      gap: 5px;
+      margin: 0.5rem 0;
+    }
+    .chapter-nav button {
+      background: #0099ff;
+      color: #fff; border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      flex: 1; /* buttons shrink evenly */
+      min-width: 100px;
+    }
+    .chapter-nav button:hover { background: #0066cc; }
+
+    /* Bookmark / Like / Comment */
+    .actions {
+      margin-top: 1rem;
+    }
+    .actions button {
+      background: #0099ff; color: #fff; border: none;
+      padding: 8px 12px; border-radius: 4px; cursor: pointer;
+      margin-right: 10px;
+    }
+    .actions button:hover { background: #0066cc; }
+
+    #comments { margin-top: 1rem; }
+    #comments h3 { margin-bottom: 0.5rem; }
+    .comment { background: #f0f8ff; border-radius: 6px; padding: 8px; margin-bottom: 8px; }
+
+    .commentadd {
+      width: 100%;
+      max-width: 100%;
+      border: 2px solid #0099ff;
+      border-radius: 4px;
+      padding: 6px;
+      box-sizing: border-box;
+      resize: vertical;
+    }
+    #commentSubmit {
+      background: #0099ff;
+      color: #fff;
+      border-radius: 4px;
+      padding: 6px 12px;
+      border: none;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+    #commentSubmit:hover { background: #0066cc; }
+  </style>
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="Topbar">
+    <nav class="nav">
+      <div class="nav-links">
+        <a class="Topbarlink" href="https://camcookieb.github.io">Home</a>
+      </div>
+      <span class="menu-btn" onclick="openMenu()">☰</span>
+    </nav>
+  </div>
+
+  <!-- Work content -->
+  <div class="content">
+    <div class="chapter-nav">
+      <button id="prevChapter">← Previous</button>
+      <button id="nextChapter">Next →</button>
+      <button id="download">Download</button>
+    </div>
+
+    <hr style="height: 2px; background-color: #0099ff; border: none;">
+    <h1 id="workTitle">Title</h1>
+    <div id="Worktags"></div><!-- Tags with Links -->
+    <div id="workMeta">By: <span id="workAuthor"></span> | Likes: <span id="workLikes"></span> | Date: <span id="workDate"></span></div>
+    <hr style="height: 2px; background-color: #0099ff; border: none;">
+    <h2 id="chaptername">Chapter Name</h2>
+    <div id="workContent">Work content goes here. Links are allowed.</div>
+
+    <hr style="height: 2px; background-color: #0099ff; border: none;">
+    <div class="chapter-nav">
+      <button id="prevChapterBottom">← Previous</button>
+      <button id="nextChapterBottom">Next →</button>
+      <button id="bookmarkBtn">Bookmark</button>
+      <button id="likeBtn">Like</button>
+    </div>
+
+    <hr style="height: 2px; background-color: #0099ff; border: none;">
+    <div id="comments">
+      <h3>Comments</h3>
+      <div id="commentList"></div>
+      <textarea id="commentInput" rows="3" class="commentadd" placeholder="Add a comment..."></textarea>
+      <button id="commentSubmit">Submit</button>
+      <div id="existing-comments"></div>
+    </div>
+  </div>
+
+  <p>Copyright 2025 by Camcookie Books</p>
+
+  <!-- Overlay menu -->
+  <div id="menuOverlay" class="overlay">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeMenu()">×</a>
+    <div class="overlay-content">
+      <a href="https://camcookieb.github.io/">Home</a>
+      <a href="https://camcookieb.github.io/search">Search</a>
+    </div>
+  </div>
+
+  <!-- Unified JS -->
+  <script src="https://camcookieb.github.io/app.js"></script>
+  <script src="https://camcookieb.github.io/menu.js"></script>
+</body>
+</html>
